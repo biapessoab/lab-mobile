@@ -14,6 +14,7 @@ class SplitTheBill extends StatefulWidget {
 class _SplitTheBillState extends State<SplitTheBill> {
   TextEditingController numPessoas = TextEditingController();
   TextEditingController totalConta = TextEditingController();
+  TextEditingController tip = TextEditingController();
   String resposta="Resposta: ";
 
   @override
@@ -43,6 +44,12 @@ class _SplitTheBillState extends State<SplitTheBill> {
           decoration: InputDecoration(
             labelText: "Número de Pessoas", labelStyle: TextStyle(fontSize: 22)),
         ),
+        TextField( controller: tip,
+          keyboardType: TextInputType.number, 
+          style: TextStyle(fontSize: 22, color: Colors.grey),
+          decoration: InputDecoration(
+            labelText: "Porcentagem gorjeta", labelStyle: TextStyle(fontSize: 22)),
+        ),
         Padding(padding: EdgeInsets.only(top:10)),
         ElevatedButton(onPressed: calcular, child: Text("Calcular")),
         Padding(padding: EdgeInsets.only(top:20)),
@@ -52,7 +59,8 @@ class _SplitTheBillState extends State<SplitTheBill> {
   }
 
   calcular(){
-    double valorFinal = double.parse(totalConta.text) / (int.parse(numPessoas.text));
+    double valorParcial = double.parse(totalConta.text) * (1 + (double.parse(tip.text)) / 100);
+    double valorFinal = valorParcial / (int.parse(numPessoas.text));
     setState(() {
         resposta = "O valor para cada pessoa é de "+ valorFinal.toStringAsPrecision(4);
     });
