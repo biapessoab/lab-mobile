@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MaterialApp(home: MyImc())); //Define como padrão o Material App
+  runApp(const MaterialApp(home: SplitTheBill())); 
 }
 
-//começa digitando sta...
-class MyImc extends StatefulWidget {
-  const MyImc({super.key});
+class SplitTheBill extends StatefulWidget {
+  const SplitTheBill({super.key});
 
   @override
-  State<MyImc> createState() => _MyImcState();
+  State<SplitTheBill> createState() => _SplitTheBillState();
 }
 
-class _MyImcState extends State<MyImc> {
+class _SplitTheBillState extends State<SplitTheBill> {
   TextEditingController numPessoas = TextEditingController();
   TextEditingController totalConta = TextEditingController();
   String resposta="Resposta: ";
@@ -28,19 +27,19 @@ class _MyImcState extends State<MyImc> {
   }
   Widget body(){ //margem
     return Container(
-      margin: EdgeInsets.all(10), //define para todos os lados
-      padding: EdgeInsets.fromLTRB(10, 20, 10,10), //determina cada lado
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.fromLTRB(10, 20, 10,10), 
       child: Column(children: [
         //campo para inserir texto
         TextField( controller: totalConta,
-          keyboardType: TextInputType.number, //restringe/ajusta o teclado para aparecer apenas as entradas "permitidas"
-          style: TextStyle(fontSize: 22, color: Colors.grey), //possibilita vários atributos para estilização
+          keyboardType: TextInputType.number, 
+          style: TextStyle(fontSize: 22, color: Colors.grey), 
           decoration: InputDecoration(
             labelText: "Total", labelStyle: TextStyle(fontSize: 22)),
         ),
          TextField( controller: numPessoas,
-          keyboardType: TextInputType.number, //restringe/ajusta o teclado para aparecer apenas as entradas "permitidas"
-          style: TextStyle(fontSize: 22, color: Colors.grey), //possibilita vários atributos para estilização
+          keyboardType: TextInputType.number, 
+          style: TextStyle(fontSize: 22, color: Colors.grey),
           decoration: InputDecoration(
             labelText: "Número de Pessoas", labelStyle: TextStyle(fontSize: 22)),
         ),
@@ -53,7 +52,7 @@ class _MyImcState extends State<MyImc> {
   }
 
   calcular(){
-    double valorFinal = int.parse(totalConta.text) / (int.parse(numPessoas.text));
+    double valorFinal = double.parse(totalConta.text) / (int.parse(numPessoas.text));
     setState(() {
         resposta = "O valor para cada pessoa é de "+ valorFinal.toStringAsPrecision(4);
     });
