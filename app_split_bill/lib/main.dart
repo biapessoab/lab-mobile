@@ -42,7 +42,7 @@ class _SplitTheBillState extends State<SplitTheBill> {
           keyboardType: TextInputType.number, 
           style: TextStyle(fontSize: 22, color: Colors.grey),
           decoration: InputDecoration(
-            labelText: "Número de Pessoas", labelStyle: TextStyle(fontSize: 22)),
+            labelText: "Número de Pessoas", labelStyle : TextStyle(fontSize: 22)),
         ),
         TextField( controller: tip,
           keyboardType: TextInputType.number, 
@@ -60,9 +60,10 @@ class _SplitTheBillState extends State<SplitTheBill> {
 
   calcular(){
     double valorParcial = double.parse(totalConta.text) * (1 + (double.parse(tip.text)) / 100);
+    double gorjeta = double.parse(totalConta.text) * (double.parse(tip.text) / 100);
     double valorFinal = valorParcial / (int.parse(numPessoas.text));
     setState(() {
-        resposta = "O valor para cada pessoa é de "+ valorFinal.toStringAsPrecision(4);
+        resposta = "Valor total " + valorParcial.toStringAsPrecision(4) + '\nValor por pessoa: ' +  valorFinal.toStringAsPrecision(4) + '\nGorjeta: ' + gorjeta.toStringAsPrecision(4);
     });
   
   }
